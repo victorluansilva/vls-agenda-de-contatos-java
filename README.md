@@ -1,4 +1,4 @@
-# Aplicação para Adição de Contatos feito em Java
+# Agenda de Contatos feito em JavaFX
 
 
 ## Tela inicial:
