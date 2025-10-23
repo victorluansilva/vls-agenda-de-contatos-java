@@ -1,21 +1,15 @@
 package agenda_de_contatos.controller;
 
-import agenda_de_contatos.MainApplication;
+
 import agenda_de_contatos.model.Contato;
 import agenda_de_contatos.service.DatabaseService;
 import agenda_de_contatos.service.ContatoService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 
 public class ContatoListController {
@@ -39,6 +33,11 @@ public class ContatoListController {
 
     private ContatoService contatoService;
     private ObservableList<Contato> obsContatos;
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
 
     public void initialize(){
@@ -89,7 +88,9 @@ public class ContatoListController {
             {
                 btnEditar.setOnAction(event -> {
                     Contato contato= getTableView().getItems().get(getIndex());
-                    abrirFormularioContato(contato);
+                    if (mainController != null) {
+                        mainController.showEditForm(contato);
+                    }
                 });
                 btnExcluir.setOnAction(event -> {
                     Contato contato= getTableView().getItems().get(getIndex());
@@ -108,26 +109,9 @@ public class ContatoListController {
 
     @FXML
     private void handleAdicionarContato() {
-        abrirFormularioContato(null);
-    }
-
-    private void abrirFormularioContato(Contato contato) {
-        try {
-            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("contato-form-view.fxml"));
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(new Scene(loader.load()));
-
-            ContatoFormController controller = loader.getController();
-            controller.setContato(contato);
-            controller.setStage(stage);
-
-            stage.showAndWait();
-
-            carregarDadosTabela();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (mainController != null) {
+            mainController.showEditForm(null);
         }
     }
-}
+
+    }

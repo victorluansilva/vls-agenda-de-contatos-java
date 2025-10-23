@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 
 public class ContatoFormController {
@@ -19,23 +18,23 @@ public class ContatoFormController {
     @FXML private TextField emailField;
     @FXML private TextField enderecoField;
 
-
-    private Stage stage;
     private Contato contato;
     private ContatoService contatoService;
+
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     public void initialize() {
         contatoService = new ContatoService();
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     public void setContato(Contato contato) {
         this.contato = contato;
         if (contato != null) {
-            titleLabel.setText("Editar Usuário");
+            titleLabel.setText("Editar Contato");
             nomeField.setText(contato.getNome());
             telefoneField.setText(contato.getTelefone());
             if (contato.getDataNascimento() != null) {
@@ -44,7 +43,7 @@ public class ContatoFormController {
             emailField.setText(contato.getEmail());
             enderecoField.setText(contato.getEndereco());
         } else {
-            titleLabel.setText("Adicionar Usuário");
+            titleLabel.setText("Adicionar Novo Contato");
         }
     }
 
@@ -66,6 +65,9 @@ public class ContatoFormController {
         } else {
             contatoService.atualizarContato(contato);
         }
-        stage.close();
+
+        if (mainController != null) {
+            mainController.initialize();
+        }
     }
 }

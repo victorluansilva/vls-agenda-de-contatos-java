@@ -9,6 +9,9 @@ module agenda_de_contatos {
     requires net.synedra.validatorfx;
     requires org.kordamp.bootstrapfx.core;
 
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.ikonli.fontawesome5;
+
     opens agenda_de_contatos to javafx.fxml;
     opens agenda_de_contatos.controller to javafx.fxml;
     opens agenda_de_contatos.model to javafx.base;
