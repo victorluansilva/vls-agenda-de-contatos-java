@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Launcher" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="agenda_de_contatos.Launcher" />
+    <module name="vls-agenda-de-contatos" />
+    <option name="VM_PARAMETERS" value="--enable-native-access=javafx.graphics --enable-native-access=org.xerial.sqlitejdbc" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="agenda_de_contatos.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
