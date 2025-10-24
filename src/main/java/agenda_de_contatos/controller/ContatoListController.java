@@ -2,8 +2,8 @@ package agenda_de_contatos.controller;
 
 
 import agenda_de_contatos.model.Contato;
-import agenda_de_contatos.service.DatabaseService;
 import agenda_de_contatos.service.ContatoService;
+import agenda_de_contatos.util.NotificationUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,11 +25,13 @@ public class ContatoListController {
     @FXML
     private TableColumn<Contato, Void> colAcoes;
 
-
     @FXML
     private Label statusLabel;
     @FXML
     private Button syncButton;
+
+    @FXML
+    private HBox statusBar;
 
     private ContatoService contatoService;
     private ObservableList<Contato> obsContatos;
@@ -46,21 +48,30 @@ public class ContatoListController {
     }
 
     private void atualizarStatusConexao(){
-        boolean isConnected = DatabaseService.testarConexao();
-        if (isConnected){
-            statusLabel.setText("DB Status: connected");
-            statusLabel.setStyle("-fx-text-fill: green");
-            syncButton.setText("refresh");
-            syncButton.setDisable(true);
-            syncButton.setVisible(false);
-        } else{
-            statusLabel.setText("DB Status: offline");
-            statusLabel.setStyle("-fx-text-fill: red");
-            syncButton.setText("retry");
-            syncButton.setDisable(false);
-            syncButton.setVisible(true);
+        if (contatoService.isConexaoMySQL()) {
+            statusBar.setVisible(true);
+            statusBar.setManaged(true);
+
+            boolean isConnected = contatoService.testarConexaoDB();
+            if (isConnected){
+                statusLabel.setText("DB Status: connected");
+                statusLabel.setStyle("-fx-text-fill: green");
+                syncButton.setText("refresh");
+                syncButton.setDisable(true);
+                syncButton.setVisible(false);
+            } else{
+                statusLabel.setText("DB Status: offline");
+                statusLabel.setStyle("-fx-text-fill: red");
+                syncButton.setText("retry");
+                syncButton.setDisable(false);
+                syncButton.setVisible(true);
+            }
+        } else {
+            statusBar.setVisible(false);
+            statusBar.setManaged(false);
         }
     }
+
     @FXML
     private void handleSincronizar(){
         contatoService.sincronizarComBanco();
@@ -95,6 +106,7 @@ public class ContatoListController {
                 btnExcluir.setOnAction(event -> {
                     Contato contato= getTableView().getItems().get(getIndex());
                     contatoService.excluirContato(contato);
+                    NotificationUtil.showSuccessToast(tableView,"Valor excluído com sucesso!");
                     carregarDadosTabela();
                 });
             }
@@ -113,5 +125,4 @@ public class ContatoListController {
             mainController.showEditForm(null);
         }
     }
-
-    }
+}

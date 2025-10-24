@@ -29,6 +29,11 @@ public class MainController {
         loadView("contato-form-view.fxml", null);
     }
 
+    @FXML
+    private void handleShowConfig() {
+        loadView("config-view.fxml", null);
+    }
+
     public void showEditForm(Contato contato) {
         loadView("contato-form-view.fxml", contato);
     }
@@ -44,6 +49,8 @@ public class MainController {
             } else if (controller instanceof ContatoFormController) {
                 ((ContatoFormController) controller).setMainController(this);
                 ((ContatoFormController) controller).setContato(contato);
+            } else if (controller instanceof ConfigController) {
+                ((ConfigController) controller).setMainController(this);
             }
 
             contentPane.getChildren().setAll(view);

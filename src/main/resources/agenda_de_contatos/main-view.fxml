@@ -34,6 +34,11 @@
                         <FontIcon iconLiteral="fas-user-plus" iconSize="20" styleClass="icon" />
                     </graphic>
                 </Button>
+                <Button fx:id="btnConfig" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleShowConfig" styleClass="sidebar-button" text="Configurações">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-cog" iconSize="20" styleClass="icon" />
+                    </graphic>
+                </Button>
                 <VBox VBox.vgrow="ALWAYS" />
                 <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" styleClass="sidebar-button" text="Sair">
                     <graphic>
