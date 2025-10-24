@@ -2,7 +2,7 @@
 
 ## 📖 Sobre
 
-**Agenda de ContatosVLS ** é uma aplicação de desktop simples e moderna para gerenciar seus contatos pessoais. Ela permite adicionar, editar, excluir e visualizar informações de contato como nome, telefone, e-mail, data de nascimento e endereço.
+**Agenda de ContatosVLS** é uma aplicação de desktop simples e moderna para gerenciar seus contatos pessoais. Ela permite adicionar, editar, excluir e visualizar informações de contato como nome, telefone, e-mail, data de nascimento e endereço.
 
 O objetivo principal deste projeto é demonstrar a construção de uma interface gráfica moderna com JavaFX, utilizando boas práticas como separação de responsabilidades (MVC adaptado), validação de formulário, feedback visual ao usuário (notificações) e abstração da camada de dados para permitir diferentes fontes de armazenamento.
 
